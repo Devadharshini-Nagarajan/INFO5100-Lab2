@@ -4,10 +4,25 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author deva
  */
 public class EmployeeHistory {
+    private ArrayList<Employees> history;
+    
+    public EmployeeHistory() {
+        this.history = new ArrayList<Employees>();
+    }
+
+    public ArrayList<Employees> getHistory() {
+        return history;
+    }
+
+    public void setHistory(ArrayList<Employees> history) {
+        this.history = history;
+    }
     
 }
