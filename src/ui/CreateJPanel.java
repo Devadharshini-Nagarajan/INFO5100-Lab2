@@ -368,7 +368,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         txtEmployeeId.setText("");
         txtAge.setText("");
         txtGender.setText("");
-//        datepickerStartDate.setText("");
+        datepickerStartDate.setDate(null);
         txtLevel.setText("");
         txtTeamInfo.setText("");
         txtPositionTitle.setText("");

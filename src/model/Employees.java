@@ -110,4 +110,9 @@ public class Employees {
     public void setPhoto(File photo) {
         this.photo = photo;
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 }
