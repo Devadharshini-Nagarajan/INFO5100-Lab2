@@ -5,10 +5,13 @@
 package ui;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import model.EmployeeHistory;
+import model.Employees;
 
 /**
  *
@@ -20,6 +23,7 @@ public class CreateJPanel extends javax.swing.JPanel {
      * Creates new form CreateJPanel
      */
     EmployeeHistory history;
+    File choosenFile;
     public CreateJPanel(EmployeeHistory history) {
         initComponents();
         this.history = history;
@@ -90,6 +94,11 @@ public class CreateJPanel extends javax.swing.JPanel {
         jLabel7.setText("Level");
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Name");
 
@@ -320,10 +329,54 @@ public class CreateJPanel extends javax.swing.JPanel {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(null);
         File selectedFile = fileChooser.getSelectedFile();
-//        user.setPhoto(selectedFile); 
+        this.choosenFile = selectedFile;
         filename = selectedFile.getAbsolutePath();
         jUploadedFileName.setText(filename);
     }//GEN-LAST:event_btnUpload1ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         
+//        String name = txtName.getText();
+//        int employeeId = Integer.parseInt(txtEmployeeId.getText());
+//        int age = Integer.parseInt(txtAge.getText());
+//        String gender = txtGender.getText();
+//        String startDate = dateFormat.format(datepickerStartDate.getDate());
+//        String level = txtLevel.getText();
+//        String teamInfo = txtTeamInfo.getText();
+//        String positionTitle = txtPositionTitle.getText();
+//        int cellPhoneNo = Integer.parseInt(txtCellPhoneNo.getText());
+//        String emailAddress = txtEmailAddress.getText();
+        
+        Employees emp = history.addNewEmployees();
+        emp.setName(txtName.getText());
+        emp.setEmployeeId(Integer.parseInt(txtEmployeeId.getText()));
+        emp.setAge(Integer.parseInt(txtAge.getText()));
+        emp.setGender(txtGender.getText());
+        emp.setStartDate(dateFormat.format(datepickerStartDate.getDate()));
+        emp.setLevel(txtLevel.getText());
+        emp.setTeamInfo(txtTeamInfo.getText());
+        emp.setPositionTitle(txtPositionTitle.getText());
+        emp.setCellPhoneNo(Integer.parseInt(txtCellPhoneNo.getText()));
+        emp.setEmailAddress(txtEmailAddress.getText());
+        emp.setPhoto(choosenFile);
+        
+        JOptionPane.showMessageDialog(this, "New Employee has been added successfully!");
+        
+        txtName.setText("");
+        txtEmployeeId.setText("");
+        txtAge.setText("");
+        txtGender.setText("");
+//        datepickerStartDate.setText("");
+        txtLevel.setText("");
+        txtTeamInfo.setText("");
+        txtPositionTitle.setText("");
+        txtCellPhoneNo.setText("");
+        txtEmailAddress.setText("");
+        choosenFile = null;
+        jUploadedFileName.setText("");
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     public static boolean valEmail(String input){
