@@ -5,6 +5,7 @@
 package model;
 
 import java.io.File;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Employees {
     private int employeeId;
     private int age;
     private String gender;
-    private String startDate;
+    private Date startDate;
     private String level;
     private String teamInfo;
     private String positionTitle;
@@ -55,11 +56,11 @@ public class Employees {
         this.gender = gender;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 

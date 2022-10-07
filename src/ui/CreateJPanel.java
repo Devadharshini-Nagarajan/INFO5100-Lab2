@@ -5,6 +5,7 @@
 package ui;
 
 import java.io.File;
+import static java.lang.Math.random;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,7 +72,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CREATE EMPLOYEE");
 
-        jLabel5.setText("Gender");
+        jLabel5.setText("Gender*");
 
         txtCellPhoneNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -87,11 +88,11 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("Email Address");
 
-        jLabel6.setText("Start Date");
+        jLabel6.setText("Start Date*");
 
         jLabel12.setText("Photo");
 
-        jLabel7.setText("Level");
+        jLabel7.setText("Level*");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -100,11 +101,11 @@ public class CreateJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Name*");
 
-        jLabel8.setText("Team Info");
+        jLabel8.setText("Team Info*");
 
-        jLabel3.setText("Employee ID");
+        jLabel3.setText("Employee ID*");
 
         txtEmployeeId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -120,7 +121,7 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         jLabel9.setText("Position title");
 
-        jLabel4.setText("Age");
+        jLabel4.setText("Age*");
 
         jLabel10.setText("Cell Phone No");
 
@@ -283,27 +284,6 @@ public class CreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
           valNumber(evt, "age");
     }//GEN-LAST:event_txtAgeKeyPressed
-
-     public void valNumber(java.awt.event.KeyEvent evt, String type){
-        char c = evt.getKeyChar();
-        if(Character.isLetter(c)){
-            if(type == "employeeid") {
-                txtEmployeeId.setEditable(false);
-                errEmployeeId.setText("Enter Number Only");
-            } else if(type == "age") {
-                txtAge.setEditable(false);
-                errAge.setText("Enter Number Only");
-            }
-        } else {
-            if(type == "employeeid") {
-                txtEmployeeId.setEditable(true);
-                errEmployeeId.setText("");
-            } else if(type == "age") {
-                txtAge.setEditable(true);
-                errAge.setText("");
-            }
-        }
-    }
      
     private void txtEmailAddressKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailAddressKeyPressed
         // TODO add your handling code here:
@@ -333,52 +313,74 @@ public class CreateJPanel extends javax.swing.JPanel {
         filename = selectedFile.getAbsolutePath();
         jUploadedFileName.setText(filename);
     }//GEN-LAST:event_btnUpload1ActionPerformed
-
+    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-         
-//        String name = txtName.getText();
-//        int employeeId = Integer.parseInt(txtEmployeeId.getText());
-//        int age = Integer.parseInt(txtAge.getText());
-//        String gender = txtGender.getText();
-//        String startDate = dateFormat.format(datepickerStartDate.getDate());
-//        String level = txtLevel.getText();
-//        String teamInfo = txtTeamInfo.getText();
-//        String positionTitle = txtPositionTitle.getText();
-//        int cellPhoneNo = Integer.parseInt(txtCellPhoneNo.getText());
-//        String emailAddress = txtEmailAddress.getText();
-        
-        Employees emp = history.addNewEmployees();
-        emp.setName(txtName.getText());
-        emp.setEmployeeId(Integer.parseInt(txtEmployeeId.getText()));
-        emp.setAge(Integer.parseInt(txtAge.getText()));
-        emp.setGender(txtGender.getText());
-        emp.setStartDate(dateFormat.format(datepickerStartDate.getDate()));
-        emp.setLevel(txtLevel.getText());
-        emp.setTeamInfo(txtTeamInfo.getText());
-        emp.setPositionTitle(txtPositionTitle.getText());
-        emp.setCellPhoneNo(Integer.parseInt(txtCellPhoneNo.getText()));
-        emp.setEmailAddress(txtEmailAddress.getText());
-        emp.setPhoto(choosenFile);
-        
-        JOptionPane.showMessageDialog(this, "New Employee has been added successfully!");
-        
-        txtName.setText("");
-        txtEmployeeId.setText("");
-        txtAge.setText("");
-        txtGender.setText("");
-        datepickerStartDate.setDate(null);
-        txtLevel.setText("");
-        txtTeamInfo.setText("");
-        txtPositionTitle.setText("");
-        txtCellPhoneNo.setText("");
-        txtEmailAddress.setText("");
-        choosenFile = null;
-        jUploadedFileName.setText("");
+        if(isValid(txtName.getText()) || isValid(txtEmployeeId.getText()) ||
+                isValid(txtAge.getText()) || isValid(txtGender.getText()) || 
+                isValid(txtLevel.getText()) || isValid(txtTeamInfo.getText()) ||
+                isValid(txtPositionTitle.getText()) || isValid(txtCellPhoneNo.getText()) ||
+                isValid(txtEmailAddress.getText()) || this.choosenFile == null || 
+                datepickerStartDate.getDate() == null ) {
+            JOptionPane.showMessageDialog(this, "Fill all the fields");
+        } else {
+            Employees emp = history.addNewEmployees();
+            emp.setName(txtName.getText());
+            emp.setEmployeeId(Integer.parseInt(txtEmployeeId.getText()));
+            emp.setAge(Integer.parseInt(txtAge.getText()));
+            emp.setGender(txtGender.getText());
+//            emp.setStartDate(dateFormat.format(datepickerStartDate.getDate()));
+            emp.setStartDate(datepickerStartDate.getDate());
+            emp.setLevel(txtLevel.getText());
+            emp.setTeamInfo(txtTeamInfo.getText());
+            emp.setPositionTitle(txtPositionTitle.getText());
+            emp.setCellPhoneNo(Integer.parseInt(txtCellPhoneNo.getText()));
+            emp.setEmailAddress(txtEmailAddress.getText());
+            emp.setPhoto(choosenFile);
+
+            JOptionPane.showMessageDialog(this, "New Employee has been added successfully!");
+
+            txtName.setText("");
+            txtEmployeeId.setText("");
+            txtAge.setText("");
+            txtGender.setText("");
+            datepickerStartDate.setDate(null);
+            txtLevel.setText("");
+            txtTeamInfo.setText("");
+            txtPositionTitle.setText("");
+            txtCellPhoneNo.setText("");
+            txtEmailAddress.setText("");
+            choosenFile = null;
+            jUploadedFileName.setText("");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-
+    private boolean isValid(String val) {
+        return val.equals("");
+    }
+ 
+    public void valNumber(java.awt.event.KeyEvent evt, String type){
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)){
+            if(type == "employeeid") {
+                txtEmployeeId.setEditable(false);
+                errEmployeeId.setText("Enter Number Only");
+            } else if(type == "age") {
+                txtAge.setEditable(false);
+                errAge.setText("Enter Number Only");
+            }
+        } else {
+            if(type == "employeeid") {
+                txtEmployeeId.setEditable(true);
+                errEmployeeId.setText("");
+            } else if(type == "age") {
+                txtAge.setEditable(true);
+                errAge.setText("");
+            }
+        }
+    }
+    
     public static boolean valEmail(String input){
         String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         Pattern emailPat = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
