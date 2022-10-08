@@ -506,6 +506,7 @@ public class ViewJpanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Employee deleted");
         populateTableData();
         changeBtnStatus(false);
+        clearAllFields();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -548,16 +549,16 @@ public class ViewJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnView1ActionPerformed
     
     private void changeBtnStatus(boolean val) {
-        txtName.setEditable(val);
-        txtEmployeeId.setEditable(val);
-        txtAge.setEditable(val);
-        txtGender.setEditable(val);
+        txtName.setEnabled(val);
+        txtEmployeeId.setEnabled(val);
+        txtAge.setEnabled(val);
+        txtGender.setEnabled(val);
         datepickerStartDate.setEnabled(val);
-        txtLevel.setEditable(val);
-        txtTeamInfo.setEditable(val);
-        txtPositionTitle.setEditable(val);
-        txtCellPhoneNo.setEditable(val);
-        txtEmailAddress.setEditable(val);
+        txtLevel.setEnabled(val);
+        txtTeamInfo.setEnabled(val);
+        txtPositionTitle.setEnabled(val);
+        txtCellPhoneNo.setEnabled(val);
+        txtEmailAddress.setEnabled(val);
         btnUpdate.setEnabled(val);
         btnUpload.setEnabled(val);
     }
